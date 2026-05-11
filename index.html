@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Summer Lab by Social Greenhouse Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1e5c38;
+    --green-mid: #2d7a4f;
+    --green-light: #e8f4ee;
+    --gold: #c9992a;
+    --gold-light: #f5e9c8;
+    --gold-bright: #f0b429;
+    --cream: #f0f8f3;
+    --white: #f7fbf8;
+    --dark: #0d1f15;
+    --text: #1a2e1f;
+    --muted: #5a7362;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(240, 248, 243, 0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(30, 92, 56, 0.08);
+  }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .nav-logo .academy {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .nav-logo .brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .nav-cta {
+    background: var(--green);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+
+  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  .lava-layer {
+    position: absolute;
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background:
+      radial-gradient(ellipse 55% 45% at 20% 60%, rgba(201,153,42,0.38) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 55% at 75% 25%, rgba(30,92,56,0.32) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 50% at 55% 85%, rgba(240,180,41,0.22) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 10% 10%, rgba(30,92,56,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 45% at 90% 70%, rgba(201,153,42,0.20) 0%, transparent 50%);
+    animation: lavaShift 14s ease-in-out infinite alternate;
+    filter: blur(48px);
+    opacity: 0.85;
+  }
+
+  .lava-layer-2 {
+    position: absolute;
+    inset: -30%;
+    width: 160%;
+    height: 160%;
+    background:
+      radial-gradient(ellipse 45% 60% at 80% 50%, rgba(240,180,41,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 55% 40% at 30% 20%, rgba(45,122,79,0.22) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 35% at 60% 10%, rgba(201,153,42,0.18) 0%, transparent 50%);
+    animation: lavaShift2 18s ease-in-out infinite alternate;
+    filter: blur(56px);
+    opacity: 0.7;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(240,248,243,0.15) 0%, rgba(240,248,243,0.72) 65%, rgba(240,248,243,0.92) 100%);
+  }
+
+  @keyframes lavaShift {
+    0% {
+      transform: translate(0%, 0%) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translate(4%, -3%) rotate(3deg) scale(1.04);
+    }
+    50% {
+      transform: translate(-3%, 5%) rotate(-2deg) scale(0.97);
+    }
+    75% {
+      transform: translate(5%, 2%) rotate(4deg) scale(1.06);
+    }
+    100% {
+      transform: translate(-4%, -4%) rotate(-3deg) scale(1.02);
+    }
+  }
+
+  @keyframes lavaShift2 {
+    0% {
+      transform: translate(0%, 0%) rotate(0deg) scale(1);
+    }
+    30% {
+      transform: translate(-5%, 4%) rotate(-4deg) scale(1.05);
+    }
+    60% {
+      transform: translate(4%, -3%) rotate(3deg) scale(0.96);
+    }
+    100% {
+      transform: translate(-3%, 5%) rotate(-2deg) scale(1.03);
+    }
+  }
+
+  .hero-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(30,92,56,0.1) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.5;
+    animation: dotsDrift 20s linear infinite;
+  }
+
+  @keyframes dotsDrift {
+    0% { background-position: 0 0; }
+    100% { background-position: 32px 32px; }
+  }
+
+  /* Animated orbs on top of lava */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+    mix-blend-mode: multiply;
+  }
+
+  .orb-1 {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(201,153,42,0.55) 0%, transparent 70%);
+    top: -80px; left: -100px;
+    filter: blur(30px);
+    animation: orbFloat1 12s ease-in-out infinite;
+  }
+
+  .orb-2 {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(30,92,56,0.50) 0%, transparent 70%);
+    bottom: -60px; right: -80px;
+    filter: blur(35px);
+    animation: orbFloat2 15s ease-in-out infinite;
+  }
+
+  .orb-3 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(240,180,41,0.45) 0%, transparent 70%);
+    top: 35%; left: 55%;
+    filter: blur(28px);
+    animation: orbFloat3 10s ease-in-out infinite;
+  }
+
+  .orb-4 {
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(30,92,56,0.35) 0%, transparent 70%);
+    top: 20%; right: 20%;
+    filter: blur(24px);
+    animation: orbFloat1 9s ease-in-out infinite reverse;
+  }
+
+  @keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, 35px) scale(1.06); }
+    66% { transform: translate(-25px, 55px) scale(0.94); }
+  }
+
+  @keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(-45px, -35px) scale(1.08); }
+    70% { transform: translate(28px, -55px) scale(0.94); }
+  }
+
+  @keyframes orbFloat3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-35px, 28px) scale(1.1); }
+  }
+
+  /* Particle canvas */
+  #heroCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-light);
+    border: 1px solid rgba(201, 153, 42, 0.3);
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    animation: pulse 1.8s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    position: relative;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero h1 .highlight {
+    color: var(--green);
+    display: inline-block;
+    position: relative;
+  }
+
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 0; right: 0;
+    height: 6px;
+    background: var(--gold-bright);
+    border-radius: 2px;
+    opacity: 0;
+    z-index: -1;
+    animation: underlineReveal 0.6s ease 1.2s forwards;
+  }
+
+  @keyframes underlineReveal {
+    from { opacity: 0; transform: scaleX(0); transform-origin: left; }
+    to { opacity: 0.5; transform: scaleX(1); }
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.6;
+    margin-top: 24px;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.75s forwards;
+  }
+
+  .hero-sub strong { color: var(--green); font-weight: 500; }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.95s forwards;
+  }
+
+  .hero-details {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.15s forwards;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 32px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(30, 92, 56, 0.25);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(30, 92, 56, 0.3);
+  }
+
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--green);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 28px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(30, 92, 56, 0.3);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--green); background: var(--green-light); }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .detail-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .detail-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .detail-sep {
+    width: 1px;
+    height: 40px;
+    background: rgba(30, 92, 56, 0.15);
+    align-self: center;
+  }
+
+  /* FLOATING CARDS */
+  .hero-float {
+    position: absolute;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    animation: float 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .float-1 {
+    top: 22%;
+    left: 4%;
+    background: white;
+    color: var(--green);
+    border: 1px solid var(--green-light);
+    animation-delay: 0s;
+  }
+
+  .float-2 {
+    top: 30%;
+    right: 4%;
+    background: var(--green);
+    color: white;
+    animation-delay: 1s;
+  }
+
+  .float-3 {
+    bottom: 22%;
+    left: 6%;
+    background: var(--gold-light);
+    color: var(--gold);
+    border: 1px solid rgba(201,153,42,0.2);
+    animation-delay: 1.8s;
+  }
+
+  .float-icon { font-size: 22px; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-float { display: none; }
+    nav { padding: 14px 20px; }
+  }
+
+  /* SECTION SHARED */
+  section { padding: 96px 24px; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  /* WHAT KIDS WILL DO */
+  .activities {
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .activities::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+      radial-gradient(ellipse 50% 40% at 90% 10%, rgba(240,180,41,0.13) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 50% at 5% 80%, rgba(30,92,56,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 35% at 50% 50%, rgba(201,153,42,0.07) 0%, transparent 55%);
+    filter: blur(50px);
+    animation: lavaShift 18s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .activity-card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 32px 28px;
+    border: 1px solid rgba(30,92,56,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .activity-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold-bright);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .activity-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .activity-card:hover::before { transform: scaleX(1); }
+
+  .activity-emoji { font-size: 36px; margin-bottom: 16px; display: block; }
+  .activity-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .activity-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* BATCHES */
+  .batches {
+    position: relative;
+    overflow: hidden;
+    background: var(--green);
+  }
+
+  .batches::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background:
+      radial-gradient(ellipse 55% 45% at 15% 70%, rgba(201,153,42,0.30) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 55% at 85% 20%, rgba(240,180,41,0.20) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(45,122,79,0.40) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 45% at 90% 85%, rgba(201,153,42,0.15) 0%, transparent 50%);
+    filter: blur(55px);
+    animation: lavaShift2 16s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .batches .section-tag { color: var(--gold-bright); position: relative; }
+  .batches .section-title { color: var(--white); position: relative; }
+  .batches .section-sub { color: rgba(255,255,255,0.65); position: relative; }
+
+  .batch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .batch-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s, transform 0.2s;
+    backdrop-filter: blur(6px);
+  }
+
+  .batch-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,153,42,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .batch-card:hover { background: rgba(255,255,255,0.13); transform: translateY(-3px); }
+
+  .batch-letter {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--gold-bright);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .batch-age {
+    display: inline-block;
+    background: rgba(201, 153, 42, 0.2);
+    color: var(--gold-bright);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .batch-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 12px; }
+  .batch-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  .batch-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* PRICING */
+  .pricing-section {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .pricing-section::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background:
+      radial-gradient(ellipse 50% 45% at 10% 30%, rgba(30,92,56,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 40% at 85% 70%, rgba(201,153,42,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 50% at 55% 15%, rgba(240,180,41,0.08) 0%, transparent 55%);
+    filter: blur(50px);
+    animation: lavaShift 20s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .pricing-box {
+    background: rgba(255,255,255,0.80);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 52px;
+    border: 1px solid rgba(30,92,56,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 52px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-box::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,153,42,0.12) 0%, transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  .price-left { position: relative; }
+
+  .price-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .price-amount span {
+    font-size: 28px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .price-detail {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  .price-detail strong { color: var(--green); font-weight: 500; }
+
+  .price-includes {
+    list-style: none;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .price-includes li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--text);
+  }
+
+  .check {
+    width: 20px; height: 20px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .check svg { width: 11px; height: 11px; stroke: var(--green); stroke-width: 2.5; }
+
+  .price-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .spots-left {
+    background: #fff3cd;
+    border: 1px solid rgba(201,153,42,0.3);
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ENROLL */
+  .enroll { background: var(--cream); position: relative; overflow: hidden; }
+
+  .enroll::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background:
+      radial-gradient(ellipse 50% 50% at 20% 50%, rgba(201,153,42,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 45% at 80% 50%, rgba(30,92,56,0.08) 0%, transparent 55%);
+    filter: blur(50px);
+    animation: lavaShift2 22s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .enroll-inner {
+    background: var(--dark);
+    border-radius: 32px;
+    padding: 72px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .enroll-inner::before {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    width: 160%;
+    height: 160%;
+    background:
+      radial-gradient(ellipse 55% 45% at 20% 80%, rgba(201,153,42,0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 55% at 80% 15%, rgba(45,122,79,0.28) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 40% at 55% 50%, rgba(240,180,41,0.12) 0%, transparent 55%);
+    filter: blur(45px);
+    animation: lavaShift 14s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .enroll-inner .section-tag { color: var(--gold-bright); position: relative; }
+
+  .enroll-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .enroll-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  .enroll-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 32px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  }
+
+  .btn-whatsapp:hover { background: #20b858; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4); }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 16px 28px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+
+  /* FAQ */
+  .faq {
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .faq::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background:
+      radial-gradient(ellipse 45% 40% at 95% 10%, rgba(30,92,56,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 45% at 5% 90%, rgba(201,153,42,0.10) 0%, transparent 55%);
+    filter: blur(50px);
+    animation: lavaShift2 24s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .faq-list { margin-top: 52px; display: flex; flex-direction: column; gap: 2px; position: relative; }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(30,92,56,0.08);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--dark);
+    gap: 16px;
+  }
+
+  .faq-q svg {
+    flex-shrink: 0;
+    width: 20px; height: 20px;
+    stroke: var(--green);
+    transition: transform 0.25s;
+  }
+
+  .faq-q.open svg { transform: rotate(45deg); }
+
+  .faq-a {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    font-weight: 300;
+  }
+
+  .faq-a.open { max-height: 200px; padding-bottom: 24px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 48px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 24px;
+  }
+
+  .footer-brand { font-family: 'Syne', sans-serif; }
+  .footer-brand .academy { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); display: block; }
+  .footer-brand .brand { font-size: 20px; font-weight: 700; color: var(--white); display: block; }
+
+  .footer-note { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    section { padding: 64px 20px; }
+    .pricing-box { padding: 32px 24px; }
+    .enroll-inner { padding: 48px 24px; }
+    footer { flex-direction: column; align-items: flex-start; padding: 40px 20px; }
+    .hero-details { gap: 20px; }
+    .detail-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="academy">Social Greenhouse Academy</span>
+    <span class="brand">AI Summer Lab</span>
+  </div>
+  <a href="#enroll" class="nav-cta">Enroll Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="lava-layer"></div>
+    <div class="lava-layer-2"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-dots"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <canvas id="heroCanvas"></canvas>
+
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Enrolling Now   Summer 2026
+  </div>
+
+  <h1>
+    Your child's<br>
+    <span class="highlight">AI adventure</span><br>
+    starts here.
+  </h1>
+
+  <p class="hero-sub">
+    A <strong>hands-on online program</strong> where kids aged 7–17 build games, songs, chatbots, art and more using AI. No experience needed   just curiosity and a big imagination.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://wa.me/923333074536?text=Hi%2C%20I%27d%20like%20to%20enroll%20my%20child%20in%20the%20AI%20Summer%20Lab%20program." target="_blank" class="btn-primary">
+      Enroll via WhatsApp
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <a href="#program" class="btn-secondary">Learn more</a>
+  </div>
+
+  <div class="hero-details">
+    <div class="detail-item">
+      <span class="detail-label">Starts</span>
+      <span class="detail-value">20th May</span>
+    </div>
+    <div class="detail-sep"></div>
+    <div class="detail-item">
+      <span class="detail-label">Sessions</span>
+      <span class="detail-value">5 Live</span>
+    </div>
+    <div class="detail-sep"></div>
+    <div class="detail-item">
+      <span class="detail-label">Investment</span>
+      <span class="detail-value">PKR 5,000</span>
+    </div>
+    <div class="detail-sep"></div>
+    <div class="detail-item">
+      <span class="detail-label">Format</span>
+      <span class="detail-value">Online</span>
+    </div>
+  </div>
+
+  <!-- Floating cards -->
+  <div class="hero-float float-1" style="animation: floatIn 0.8s ease 1.4s both, float 4s ease-in-out 2.2s infinite;">
+    <span class="float-icon">🎮</span>
+    <span>Build AI games</span>
+  </div>
+  <div class="hero-float float-2" style="animation: floatIn 0.8s ease 1.6s both, float 5s ease-in-out 2.4s infinite;">
+    <span class="float-icon">🎵</span>
+    <span>Create AI music</span>
+  </div>
+  <div class="hero-float float-3" style="animation: floatIn 0.8s ease 1.8s both, float 3.5s ease-in-out 2.6s infinite;">
+    <span class="float-icon">🏆</span>
+    <span>Earn a certificate</span>
+  </div>
+</section>
+
+<!-- WHAT KIDS WILL DO -->
+<section class="activities" id="program">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">What they'll create</span>
+      <h2 class="section-title">Real skills. Real projects.<br>Real confidence.</h2>
+      <p class="section-sub">Every session your child builds something tangible   not just watches a video. Because in Pakistan, we don't have enough kids who believe they can create. We're changing that.</p>
+    </div>
+
+    <div class="activity-grid">
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🎮</span>
+        <div class="activity-title">Games</div>
+        <p class="activity-desc">Kids design and build their own interactive games using AI   developing logical thinking and problem-solving skills that last a lifetime.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🎵</span>
+        <div class="activity-title">Songs & Music</div>
+        <p class="activity-desc">Write lyrics, generate beats, produce original AI-powered songs. Self-expression through creativity   a skill no textbook teaches.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">💬</span>
+        <div class="activity-title">Their Own AI Chatbot</div>
+        <p class="activity-desc">Build a chatbot with a personality they design from scratch. Kids learn how AI actually works   not just how to use it.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🎨</span>
+        <div class="activity-title">AI Art</div>
+        <p class="activity-desc">Master the art of prompting and generate stunning digital artwork. A portfolio piece they can actually show off   and a skill the world is paying for.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">📖</span>
+        <div class="activity-title">Comics & Stories</div>
+        <p class="activity-desc">Turn their wildest ideas into illustrated comics and stories using AI. Builds creative writing, sequencing, and visual storytelling.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🎬</span>
+        <div class="activity-title">Animated Videos</div>
+        <p class="activity-desc">Script, design, and produce short animated videos using AI tools. The same technology behind content creators earning online   introduced early.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">📚</span>
+        <div class="activity-title">Study Buddy Bot</div>
+        <p class="activity-desc">Build a personalised AI study assistant for their own subjects. Turns AI from a distraction into the most productive tool in their school bag.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🐾</span>
+        <div class="activity-title">Virtual Pet</div>
+        <p class="activity-desc">Design and bring to life an AI-powered virtual pet with its own personality. Kids learn empathy, design thinking, and basic AI logic   all through play.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">🏆</span>
+        <div class="activity-title">Quiz Game Show</div>
+        <p class="activity-desc">Build and host their own AI-powered quiz game show. Builds public speaking, confidence, and leadership   things our education system skips.</p>
+      </div>
+      <div class="activity-card reveal">
+        <span class="activity-emoji">📰</span>
+        <div class="activity-title">News Reporter Bot</div>
+        <p class="activity-desc">Create an AI news anchor that reads and summarises real news. Teaches critical thinking, media literacy, and how to separate facts from noise.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:52px; background:var(--green); border-radius:20px; padding:40px 36px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <div style="font-size:40px; flex-shrink:0;">🚀</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:white; margin-bottom:8px;">The sky is just the starting point.</div>
+        <p style="font-size:15px; color:rgba(255,255,255,0.7); line-height:1.7; max-width:580px;">These are just examples. Once your child understands how to work with AI, there are no limits to what they can build. We teach them to think like creators   not just consumers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BATCHES -->
+<section class="batches">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Batches</span>
+      <h2 class="section-title" style="color:white">The right group<br>for every age.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6)">We keep groups small so every child gets attention. Batches open based on enrollment   reserve your spot early.</p>
+    </div>
+
+    <div class="batch-grid">
+      <div class="batch-card reveal">
+        <div class="batch-letter">A</div>
+        <div class="batch-age">Ages 7–10</div>
+        <div class="batch-name">Little Creators</div>
+        <p class="batch-desc">Super visual, game-based sessions. No typing-heavy work   all creative, all fun. Perfect introduction to AI.</p>
+        <span class="batch-tag">Beginner friendly</span>
+      </div>
+      <div class="batch-card reveal">
+        <div class="batch-letter">B</div>
+        <div class="batch-age">Ages 11–14</div>
+        <div class="batch-name">Junior Builders</div>
+        <p class="batch-desc">More depth, more challenge. Build bots, write stories, and explore how AI actually thinks.</p>
+        <span class="batch-tag">Creative depth</span>
+      </div>
+      <div class="batch-card reveal">
+        <div class="batch-letter">C</div>
+        <div class="batch-age">Ages 15–17</div>
+        <div class="batch-name">Teen Innovators</div>
+        <p class="batch-desc">This batch goes deeper   strategy, AI tools for productivity, and real-world applications of AI.</p>
+        <span class="batch-tag">Advanced track</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Pricing</span>
+      <h2 class="section-title">Simple, one-time<br>investment.</h2>
+    </div>
+
+    <div class="pricing-box reveal">
+      <div class="price-left">
+        <div class="price-amount">5,000 <span>PKR</span></div>
+        <p class="price-detail">One-time payment · <strong>5 live sessions</strong> · per child</p>
+        <ul class="price-includes">
+          <li>
+            <span class="check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3"/></svg></span>
+            5 live, interactive online sessions
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3"/></svg></span>
+            Age-appropriate batch placement
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3"/></svg></span>
+            Real projects to take home
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3"/></svg></span>
+            Completion certificate
+          </li>
+          <li>
+            <span class="check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3"/></svg></span>
+            Access to Level 2 program after completion
+          </li>
+        </ul>
+      </div>
+      <div class="price-right">
+        <div class="spots-left">
+          🔥 Limited spots per batch
+        </div>
+        <a href="https://wa.me/923333074536?text=Hi%2C%20I%27d%20like%20to%20enroll%20my%20child%20in%20the%20AI%20Summer%20Lab%20program." target="_blank" class="btn-primary" style="font-size:15px">
+          Reserve a spot now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px">WhatsApp us to confirm your batch</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL CTA -->
+<section class="enroll" id="enroll">
+  <div class="container">
+    <div class="enroll-inner reveal">
+      <span class="section-tag">Ready to enroll?</span>
+      <h2 class="enroll-title">Give your child<br>a creative edge.</h2>
+      <p class="enroll-sub">Fill in the form below and we'll reach out to confirm your child's spot and batch. Takes less than a minute.</p>
+      <div style="margin-top:36px; border-radius:16px; overflow:hidden; position:relative;">
+        <iframe data-tally-src="https://tally.so/embed/KYvkYk?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="400"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="AI Summer Program Enrollment Form"
+          style="border-radius:16px; background:transparent;">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">Questions</span>
+      <h2 class="section-title">Got questions?<br>We've got answers.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Does my child need any prior experience with AI or coding?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Absolutely not. The program is designed from scratch for beginners. If your child can use a phone or tablet, they're ready.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What does my child need to join?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">A laptop or tablet, a stable internet connection, and a lot of curiosity. We'll handle the rest   tools, links, and session materials are all provided.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          When exactly are the 5 sessions?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Sessions begin on 20th May. The schedule will be shared upon enrollment based on your child's batch. We keep sessions child-friendly in length   no marathon classes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What happens after the 5 sessions?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Graduates get access to Level 2 of the AI Summer Lab   a deeper program tailored to their batch level. We'll share details before the program ends.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this only for kids in Karachi?
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">No   it's fully online, so kids from anywhere in Pakistan (or abroad) can join. All you need is internet access.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="academy">Social Greenhouse Academy</span>
+    <span class="brand">AI Summer Lab 2026</span>
+  </div>
+  <p class="footer-note">© 2026 Social Greenhouse Academy · All rights reserved</p>
+</footer>
+
+<script>
+  // Particle canvas
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    const hero = canvas.parentElement;
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2.5 + 0.5,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: -Math.random() * 0.6 - 0.2,
+      alpha: Math.random() * 0.5 + 0.1,
+      color: Math.random() > 0.5 ? '30,92,56' : '201,153,42'
+    };
+  }
+
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < 60; i++) particles.push(createParticle());
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      p.alpha -= 0.0008;
+      if (p.alpha <= 0 || p.y < -10) particles[i] = createParticle();
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  resizeCanvas();
+  initParticles();
+  animateParticles();
+  window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+  // Tally embed
+  var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+</script>
+
+</body>
+</html>
